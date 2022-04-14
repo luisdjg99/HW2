@@ -18,5 +18,6 @@ This array is later sorted and ready to be inserted into the Concurrent Linked L
 
 Now,  my implementation of a Concurrent Linked List, as mentioned above uses a Coarse_Grained Approach, where a single reentrant lock is used to restric read and write operations to the Linked List.
 
+The sorted array is split by 4 intervals ( one interval per thread) and each thread will create its own instance of a concurrent linked list. After inserting all values, then all 4 mini linked lists are joined. Forming the final sorted list of "presents".
 
-
+This situation is starvation free, as threads will not interfere with each other, and the shared resource (in this case the sorted array) will not be infinately lock at any point. 
